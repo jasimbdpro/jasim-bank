@@ -69,6 +69,15 @@
         </div>
 
         <script>
+            //Login button event handler
+            const loginBtn = document.getElementById('login');
+            loginBtn.addEventListener('click', function (event) {
+                const loginArea = document.getElementById('login-area');
+                loginArea.style.display = 'none'
+                const transactionArea = document.getElementById('transaction-area');
+                transactionArea.style.display = 'block'
+            })
+
             //Event Handler to Deposit Button
             const depositeButton = document.getElementById('deposit-button')
             depositeButton.addEventListener('click', function () {

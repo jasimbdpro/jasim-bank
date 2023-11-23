@@ -11,15 +11,10 @@ body {
 
 }
 
-#login-area {
-    display: none;
-    /* temporily */
-}
 
 #transaction-area {
-    /* display: none; */
-    display: block;
-    /* temporarily */
+    display: none;
+
 }
 
 .deposite {
