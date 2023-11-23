@@ -3,6 +3,7 @@ body {
 }
 
 .submit-area {
+
     margin: 50px;
     padding: 40px;
     border-radius: 10px;
@@ -10,8 +11,15 @@ body {
 
 }
 
-#transaction-area {
+#login-area {
     display: none;
+    /* temporily */
+}
+
+#transaction-area {
+    /* display: none; */
+    display: block;
+    /* temporarily */
 }
 
 .deposite {
