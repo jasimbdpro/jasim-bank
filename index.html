@@ -36,7 +36,7 @@
             <div class="col-md-4">
                 <div class="withdraw margin-padding">
                     <h5>Withdraw</h5>
-                    <h2>$00</h2>
+                    <h2>$<span id="current-withdraw">00</span></h2>
                 </div>
             </div>
             <div class="col-md-4 ">
@@ -58,9 +58,10 @@
             <div class="row col-md-6">
                 <div class="submit-area">
                     <h4>Withdraw</h4>
-                    <input type="text" class="form-control" placeholder="$ amount you want to withdraw">
+                    <input id="withdraw-amount" type="text" class="form-control"
+                        placeholder="$ amount you want to withdraw">
                     <br>
-                    <button class="btn btn-success">Withdraw</button>
+                    <button id="add-withdraw" class="btn btn-success">Withdraw</button>
 
                 </div>
             </div>
@@ -82,21 +83,49 @@
             depositeBtn.addEventListener('click', function () {
                 const depositeAmount = document.getElementById('deposite-amount').value;
                 const depositeNumber = parseFloat(depositeAmount);
-
-                const currentDeposite = document.getElementById('current-deposite').innerText;
-                const currentDepositeNumber = parseFloat(currentDeposite);
-
-                const totalDeposite = depositeNumber + currentDepositeNumber;
-
-
-                document.getElementById('current-deposite').innerText = totalDeposite;
-
-                const currentBalance = document.getElementById('current-balance').innerText;
-                const currentBalanceNumber = parseFloat(currentBalance);
-                const totalBalance = currentBalanceNumber + depositeNumber;
-                document.getElementById('current-balance').innerText = totalBalance;
+                updateSpanText('current-deposite', depositeNumber);
+                updateSpanText('current-balance', depositeNumber);
                 document.getElementById('deposite-amount').value = "";
             })
+
+
+            //Withdraw button event handler
+            //Withdraw button event handler
+            //Withdraw button event handler
+            //Withdraw button event handler
+            //Withdraw button event handler
+            const withdrawBtn = document.getElementById('add-withdraw');
+            withdrawBtn.addEventListener('click', function () {
+                const withdrawNumber = getInputNumber('withdraw-amount');
+                const currentWithdraw = getInnerTextNumber('current-withdraw')
+                totalWithdraw = withdrawNumber + currentWithdraw;
+                document.getElementById('current-withdraw').innerText = totalWithdraw;
+
+
+            })
+            function getInnerTextNumber(id) {
+                const stringText = document.getElementById(id).innerText;
+                const textToNumber = parseFloat(stringText)
+                return textToNumber;
+            }
+            function getInputNumber(id) {
+                const inputTextValue = document.getElementById(id).value;
+                const inputTextNumber = parseFloat(inputTextValue)
+                return inputTextNumber;
+                // console.log(withdrawNumber)
+            }
+
+
+
+
+            //To make reapetative work quickly we can define this fuction, and call it before form any line.
+            function updateSpanText(id, depositeNumber) {
+                const current = document.getElementById(id).innerText;
+                const currentNumber = parseFloat(current);
+                const totalAmount = depositeNumber + currentNumber;
+                document.getElementById(id).innerText = totalAmount;
+            }
+
 
 
         </script>
