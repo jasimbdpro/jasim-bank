@@ -20,7 +20,7 @@
             <h4>Login</h4>
             <input type="text" class="form-control" placeholder="Email">
             <br>
-            <input type="password" name="" id="" class="form-control" placeholder="Password">
+            <input type="password" name="" class="form-control" placeholder="Password">
             <br>
             <button id="login" class="btn btn-success">Enter</button>
         </div>
@@ -30,38 +30,38 @@
             <div class="col-md-4 ">
                 <div class="deposite margin-padding">
                     <h5>Deposit</h5>
-                    <h2>$<span id="current-deposite">00</span> </h2>
+                    <h2>$<span id="deposit-status">00</span> </h2>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="withdraw margin-padding">
                     <h5>Withdraw</h5>
-                    <h2>$<span id="current-withdraw">00</span></h2>
+                    <h2>$<span id="withdraw-status">00</span></h2>
                 </div>
             </div>
             <div class="col-md-4 ">
                 <div class="balance margin-padding">
                     <h5>Balance</h5>
-                    <h2>$<span id="current-balance">1240</span></h2>
+                    <h2>$<span id="balance-status">1240</span></h2>
                 </div>
             </div>
             <div class="row col-md-6">
                 <div class="submit-area">
                     <h4>Deposit</h4>
-                    <input id="deposite-amount" type="text" class="form-control"
+                    <input id="input-deposit" type="text" class="form-control"
                         placeholder="$ amount you want to deposite">
                     <br>
-                    <button id="addDeposite" class="btn btn-success">Deposit</button>
+                    <button id="deposit-button" class="btn btn-success">Deposit</button>
 
                 </div>
             </div>
             <div class="row col-md-6">
                 <div class="submit-area">
                     <h4>Withdraw</h4>
-                    <input id="withdraw-amount" type="text" class="form-control"
+                    <input id="input-withdraw" type="text" class="form-control"
                         placeholder="$ amount you want to withdraw">
                     <br>
-                    <button id="add-withdraw" class="btn btn-success">Withdraw</button>
+                    <button id="withdraw-button" class="btn btn-success">Withdraw</button>
 
                 </div>
             </div>
@@ -69,66 +69,43 @@
         </div>
 
         <script>
-            //Login button event handler
-            const loginBtn = document.getElementById('login');
-            loginBtn.addEventListener('click', function (event) {
-                const loginArea = document.getElementById('login-area');
-                loginArea.style.display = 'none'
-                const transactionArea = document.getElementById('transaction-area');
-                transactionArea.style.display = 'block'
+            //Event Handler to Deposit Button
+            const depositeButton = document.getElementById('deposit-button')
+            depositeButton.addEventListener('click', function () {
+                const inputDeposit = inputToNumber('input-deposit')
+                const depositStatus = textToNumber('deposit-status')
+                const totalDeposit = inputDeposit + depositStatus;
+                document.getElementById('deposit-status').innerText = totalDeposit;
+
+                const balanceStatus = textToNumber('balance-status');
+                const addBalanceStatus = balanceStatus + inputDeposit;
+                document.getElementById('balance-status').innerText = addBalanceStatus;
+                document.getElementById('input-deposit').value = "";
             })
 
-            //Deposite button event handler
-            const depositeBtn = document.getElementById('addDeposite');
-            depositeBtn.addEventListener('click', function () {
-                const depositeAmount = document.getElementById('deposite-amount').value;
-                const depositeNumber = parseFloat(depositeAmount);
-                updateSpanText('current-deposite', depositeNumber);
-                updateSpanText('current-balance', depositeNumber);
-                document.getElementById('deposite-amount').value = "";
+            //Event Handler to Withdraw Button
+            const withdrawButton = document.getElementById('withdraw-button')
+            withdrawButton.addEventListener('click', function () {
+                const inputWithdraw = inputToNumber('input-withdraw')
+                const withdrawStatus = textToNumber('withdraw-status')
+                const totalWithdraw = inputWithdraw + withdrawStatus;
+                document.getElementById('withdraw-status').innerText = totalWithdraw;
+                document.getElementById('balance-status').innerText = document.getElementById('balance-status').innerText - inputWithdraw;
+                document.getElementById('input-withdraw').value = "";
             })
 
 
-            //Withdraw button event handler
-            //Withdraw button event handler
-            //Withdraw button event handler
-            //Withdraw button event handler
-            //Withdraw button event handler
-            const withdrawBtn = document.getElementById('add-withdraw');
-            withdrawBtn.addEventListener('click', function () {
-                const withdrawNumber = getInputNumber('withdraw-amount');
-                const currentWithdraw = getInnerTextNumber('current-withdraw')
-                totalWithdraw = withdrawNumber + currentWithdraw;
-                document.getElementById('current-withdraw').innerText = totalWithdraw;
-
-
-
-            })
-            function getInnerTextNumber(id) {
-                const stringText = document.getElementById(id).innerText;
-                const textToNumber = parseFloat(stringText)
-                return textToNumber;
-            }
-            function getInputNumber(id) {
-                const inputTextValue = document.getElementById(id).value;
-                const inputTextNumber = parseFloat(inputTextValue)
-                return inputTextNumber;
-
+            //converts input text to number
+            function inputToNumber(id) {
+                inputNumber = parseFloat(document.getElementById(id).value);
+                return inputNumber
             }
 
-
-
-
-            //To make reapetative work quickly we can define this fuction, and call it before form any line.
-            function updateSpanText(id, depositeNumber) {
-                const current = document.getElementById(id).innerText;
-                const currentNumber = parseFloat(current);
-                const totalAmount = depositeNumber + currentNumber;
-                document.getElementById(id).innerText = totalAmount;
+            //convert innerText to number
+            function textToNumber(id) {
+                textNumber = parseFloat(document.getElementById(id).innerText);
+                return textNumber
             }
-
-
-
         </script>
 </body>
 
